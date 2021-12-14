@@ -1,0 +1,49 @@
+////////////////////////////////////NOTES:
+# Possible Exchanges: https://defiprime.com/exchanges
+# Uniswap
+# Sushiswap//Sushiswap has very good query documentation: https://dev.sushi.com/api/subgraphs/exchange/queries
+# //(Not an exchange) 1inch?//Can attain best swapping route across exchagnes by 'queryng the smart contract directly on Etherscan.': 
+# Kyber/Krystal?
+# Bancor
+# Swapr https://swapr.eth.link/#/swap?chainId=1
+# Mooniswap https://mooniswap.exchange/
+# Dydx: p1: https://extropy-io.medium.com/coding-a-defi-arbitrage-bot-45e550d85089 - Arbitrage bot already made-up 
+#        p2: https://extropy-io.medium.com/arbitrage-bot-part-2-97e7b710dcf
+# Mesa https://mesa.eth.link/
+////////////////////////////////////////
+//Uniswap Prices:
+{
+          pools(
+            orderBy: volumeUSD, 
+            orderDirection: desc, 
+            first: 100,
+          where: {
+            token0: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+            liquidity_gt: 0
+          }
+         )
+          {
+            token0{symbol}
+            token1{symbol}
+            token0Price
+            liquidity
+            feeTier
+          }
+        }    
+////////////////////////////////////////        
+//Sushiswap Prices:
+{
+ pairs(
+  first: 100
+  orderBy: volumeUSD
+  orderDirection: desc
+	where: {
+  	token0: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+    reserve1_gt: 0
+    }
+ ) {
+  token1{symbol}
+  reserve1
+  token0Price
+ }
+}
